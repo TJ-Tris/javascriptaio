@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ingredients List from Function</title>
+  </head>
+  <body>
+    <ul id="Ingredients"></ul>
+    <script>
+      const ingredients = [
+        "eggs",
+        "milk",
+        "cheese",
+        "garlic",
+        "onion",
+        "kale",
+        "salt",
+        "pepper",
+      ];
+      /* let listitems = ingredients
+        .map((singleingredient) => `<li>${singleingredient}</li>`)
+        .join(""); */
+      function makeUnorderedList(array = []) {
+        let listitems = array.map(function (element) {
+          return `<li>${element}</li>`;
+        });
+        return `<ul>${listitems.join("")}</ul>`;
+      }
+      // document.getElementById("Ingredients").innerHTML = listitems;
+      document.getElementById("Ingredients").innerHTML =
+        makeUnorderedList(ingredients);
+    </script>
+  </body>
+</html>

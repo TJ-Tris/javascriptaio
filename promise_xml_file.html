@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="text-display-area"></div>
+    <script>
+      function bookload(url) {
+        return new Promise(function (resolve, reject) {
+          let request = new XMLHttpRequest();
+
+          // Initialise the request for the URL with the 'open' Promise property
+          request.open("GET", url);
+
+          // Create an event listener to fire once the requested text file has finished loading
+          request.onload = function () {
+            if (request.status === 200) {
+              resolve(request.response);
+            } else {
+              reject(
+                Error(`The text couldn't be loaded: ${request.statusText}`)
+              );
+            }
+          };
+
+          // Create an event listener to fire if there is an error in the loading process
+          request.onerror = function () {
+            reject(Error("There was a network error."));
+          };
+
+          // Send the URL request over the network via HTTP
+          request.send();
+        });
+      }
+      const displayArea = document.getElementById("text-display-area");
+
+      bookload("mobydick.txt").then(
+        function (response) {
+          displayArea.innerHTML = response;
+        },
+        function (Error) {
+          console.log(Error);
+        }
+      );
+    </script>
+  </body>
+</html>
